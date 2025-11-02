@@ -3,7 +3,7 @@
 ## Category Entity
 [X] Create Category
 [X] List All Categories
-[ ] Get Category
+[X] Get Category
 [ ] Edit Category
 [ ] Delete / Invisible Category
 
@@ -13,7 +13,6 @@
 [ ] Get Product
 [ ] Edit Product
 [ ] Delete / Invisible Product
-
 
 ## Shopping List Entity
 [ ] Create Shopping List
