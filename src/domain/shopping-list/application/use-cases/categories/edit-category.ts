@@ -25,6 +25,10 @@ export class EditCategoryUseCase {
       return fail(new CategoryNotFoundError());
     }
 
+    if (category.deletedAt) {
+      return fail(new CategoryNotFoundError());
+    }
+
     category.name = name;
     category.description = description;
 
