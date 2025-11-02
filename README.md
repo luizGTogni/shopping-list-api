@@ -4,7 +4,7 @@
 [X] Create Category
 [X] List All Categories
 [X] Get Category
-[ ] Edit Category
+[X] Edit Category
 [ ] Delete / Invisible Category
 
 ## Product Entity
