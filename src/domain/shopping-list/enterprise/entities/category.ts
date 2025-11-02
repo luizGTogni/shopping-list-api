@@ -15,6 +15,14 @@ export class Category extends Entity<ICategoryProps> {
     return this.props.description;
   }
 
+  set name(name: string) {
+    this.props.name = name;
+  }
+
+  set description(description: string) {
+    this.props.description = description;
+  }
+
   static create(props: ICategoryProps, id?: UniqueEntityID) {
     const category = new Category(props, id);
     return category;
