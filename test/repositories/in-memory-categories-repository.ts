@@ -10,6 +10,11 @@ export class InMemoryCategoriesRepository implements ICategoriesRepository {
     this.items.push(category);
   }
 
+  async save(category: Category): Promise<void> {
+    const itemIndex = this.items.findIndex((item) => item.equals(category));
+    this.items[itemIndex] = category;
+  }
+
   async findById(id: string): Promise<Category | null> {
     return this.items.find((item) => item.id.toString() === id) || null;
   }
