@@ -12,12 +12,12 @@ test("success result", () => {
   const result = doSomething(true);
 
   expect(result.isFailed()).toBe(false);
-  expect(result.isSuccessed()).toBe(true);
+  expect(result.isSucceeded()).toBe(true);
 });
 
 test("failure result", () => {
   const result = doSomething(false);
 
   expect(result.isFailed()).toBe(true);
-  expect(result.isSuccessed()).toBe(false);
+  expect(result.isSucceeded()).toBe(false);
 });

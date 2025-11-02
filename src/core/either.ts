@@ -9,7 +9,7 @@ export class Fail<FailType, SuccessType> {
     return true;
   }
 
-  isSuccessed(): this is Success<FailType, SuccessType> {
+  isSucceeded(): this is Success<FailType, SuccessType> {
     return false;
   }
 }
@@ -25,7 +25,7 @@ export class Success<FailType, SuccessType> {
     return false;
   }
 
-  isSuccessed(): this is Success<FailType, SuccessType> {
+  isSucceeded(): this is Success<FailType, SuccessType> {
     return true;
   }
 }
