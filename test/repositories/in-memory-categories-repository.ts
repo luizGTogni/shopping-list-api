@@ -10,6 +10,10 @@ export class InMemoryCategoriesRepository implements ICategoriesRepository {
     this.items.push(category);
   }
 
+  async findById(id: string): Promise<Category | null> {
+    return this.items.find((item) => item.id.toString() === id) || null;
+  }
+
   async findMany({ page }: IPaginationParams): Promise<Category[]> {
     const startIndex = (page - 1) * this.NUMBER_BY_PAGE;
     const endIndex = page * this.NUMBER_BY_PAGE;
