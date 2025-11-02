@@ -1,6 +1,6 @@
 import { Either, success } from "#core/either.js";
 import { Category } from "#domain/shopping-list/enterprise/entities/category.js";
-import { ICategoriesRepository } from "../repositories/categories-repository";
+import { ICategoriesRepository } from "../../repositories/categories-repository";
 
 interface ICreateCategoryUseCaseRequest {
   name: string;
