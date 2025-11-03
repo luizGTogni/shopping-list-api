@@ -9,7 +9,7 @@
 
 ## Product Entity
 [X] Create Product
-[ ] List All Products
+[X] List All Products
 [ ] Get Product
 [ ] Edit Product
 [ ] Delete / Invisible Product
