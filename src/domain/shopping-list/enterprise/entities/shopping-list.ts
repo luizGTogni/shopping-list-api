@@ -4,14 +4,19 @@ import { Optional } from "#core/types/optional.js";
 import { ProductList } from "./product-list";
 
 export interface IShoppingList {
+  shopperId: UniqueEntityID;
   title: string;
-  products: ProductList[];
+  products: ProductList;
   doneAt?: Date;
   createdAt: Date;
   updatedAt?: Date;
 }
 
 export class ShoppingList extends AggregateRoot<IShoppingList> {
+  get shopperId() {
+    return this.props.shopperId;
+  }
+
   get title() {
     return this.props.title;
   }
@@ -40,9 +45,13 @@ export class ShoppingList extends AggregateRoot<IShoppingList> {
     this.props.doneAt = new Date();
   }
 
-  static create(props: Optional<IShoppingList, "createdAt">, id?: UniqueEntityID) {
+  static create(props: Optional<IShoppingList, "createdAt" | "products">, id?: UniqueEntityID) {
     const shoppingList = new ShoppingList(
-      { ...props, createdAt: props.createdAt ?? new Date() },
+      {
+        ...props,
+        createdAt: props.createdAt ?? new Date(),
+        products: props.products ?? new ProductList(),
+      },
       id,
     );
     return shoppingList;
