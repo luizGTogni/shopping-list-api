@@ -10,6 +10,10 @@ export class InMemoryProductsRepository implements IProductsRepository {
     this.items.push(product);
   }
 
+  async findById(id: string): Promise<Product | null> {
+    return this.items.find((item) => item.id.toString() === id) || null;
+  }
+
   async findMany({ page }: IPaginationParams): Promise<Product[]> {
     const startIndex = (page - 1) * this.NUMBER_BY_PAGE;
     const endIndex = page * this.NUMBER_BY_PAGE;
