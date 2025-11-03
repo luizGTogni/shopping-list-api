@@ -8,7 +8,7 @@
 [X] Delete / Invisible Category
 
 ## Product Entity
-[ ] Create Product
+[X] Create Product
 [ ] List All Products
 [ ] Get Product
 [ ] Edit Product
