@@ -21,7 +21,7 @@
 [X] Create Shopping List
 [X] List All Shopping List
 [X] Get Shopping List
-[ ] Edit Shopping List
+[X] Edit Shopping List
 [ ] Done Shopping List
 [ ] Delete
 
