@@ -1,8 +1,8 @@
 import { WatchedList } from "#core/entities/watched-list.js";
-import { Product } from "./product";
+import { ProductShoppingList } from "./product-shopping-list";
 
-export class ProductList extends WatchedList<Product> {
-  compareItems(a: Product, b: Product): boolean {
-    return a.id.equals(b.id);
+export class ProductList extends WatchedList<ProductShoppingList> {
+  compareItems(a: ProductShoppingList, b: ProductShoppingList): boolean {
+    return a.productId.equals(b.productId) && a.shoppingListId.equals(b.shoppingListId);
   }
 }
