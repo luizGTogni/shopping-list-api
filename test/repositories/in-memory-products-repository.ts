@@ -10,6 +10,11 @@ export class InMemoryProductsRepository implements IProductsRepository {
     this.items.push(product);
   }
 
+  async save(product: Product): Promise<void> {
+    const itemIndex = this.items.findIndex((item) => item.equals(product));
+    this.items[itemIndex] = product;
+  }
+
   async findById(id: string): Promise<Product | null> {
     return this.items.find((item) => item.id.toString() === id) || null;
   }
