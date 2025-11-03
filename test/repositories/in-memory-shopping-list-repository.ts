@@ -10,6 +10,10 @@ export class InMemoryShoppingListsRepository implements IShoppingListsRepository
     this.items.push(shoppingList);
   }
 
+  async findById(id: string): Promise<ShoppingList | null> {
+    return this.items.find((item) => item.id.toString() === id) || null;
+  }
+
   async findManyByShopperId(
     shopperId: string,
     { page }: IPaginationParams,
