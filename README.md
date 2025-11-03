@@ -1,6 +1,7 @@
 # shopping-list-api
 
 ## Category Entity
+
 [X] Create Category
 [X] List All Categories
 [X] Get Category
@@ -8,6 +9,7 @@
 [X] Delete / Invisible Category
 
 ## Product Entity
+
 [X] Create Product
 [X] List All Products
 [X] Get Product
@@ -15,7 +17,8 @@
 [X] Delete / Invisible Product
 
 ## Shopping List Entity
-[ ] Create Shopping List
+
+[X] Create Shopping List
 [ ] List All Shopping List
 [ ] Get Shopping List
 [ ] Edit Shopping List
