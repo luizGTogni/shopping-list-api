@@ -2,15 +2,15 @@ import { InMemoryShoppersRepository } from "#test/repositories/in-memory-shopper
 import { InMemoryShoppingListsRepository } from "#test/repositories/in-memory-shopping-list-repository.js";
 import { CreateShoppingListUseCase } from "./create-shopping-list";
 
-let shoppinglistsRepository: InMemoryShoppingListsRepository;
+let shoppingListsRepository: InMemoryShoppingListsRepository;
 let shoppersRepository: InMemoryShoppersRepository;
 let sut: CreateShoppingListUseCase;
 
 describe("Create ShoppingList", () => {
   beforeEach(() => {
-    shoppinglistsRepository = new InMemoryShoppingListsRepository();
+    shoppingListsRepository = new InMemoryShoppingListsRepository();
     shoppersRepository = new InMemoryShoppersRepository();
-    sut = new CreateShoppingListUseCase(shoppinglistsRepository, shoppersRepository);
+    sut = new CreateShoppingListUseCase(shoppingListsRepository, shoppersRepository);
   });
 
   it("should be able to create a shopping list", async () => {
@@ -24,7 +24,7 @@ describe("Create ShoppingList", () => {
     });
 
     if (result.isSucceeded()) {
-      expect(shoppinglistsRepository.items).toHaveLength(1);
+      expect(shoppingListsRepository.items).toHaveLength(1);
       expect(result.value.shoppingList.title).toEqual(resultExpected.title);
       expect(result.value.shoppingList.shopperId.toString()).toEqual("1");
     }
