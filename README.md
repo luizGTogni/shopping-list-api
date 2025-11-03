@@ -12,7 +12,7 @@
 [X] List All Products
 [X] Get Product
 [X] Edit Product
-[ ] Delete / Invisible Product
+[X] Delete / Invisible Product
 
 ## Shopping List Entity
 [ ] Create Shopping List
