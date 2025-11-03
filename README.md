@@ -11,7 +11,7 @@
 [X] Create Product
 [X] List All Products
 [X] Get Product
-[ ] Edit Product
+[X] Edit Product
 [ ] Delete / Invisible Product
 
 ## Shopping List Entity
