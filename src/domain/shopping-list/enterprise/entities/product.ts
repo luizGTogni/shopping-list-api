@@ -7,6 +7,7 @@ export interface IProductProps {
   name: string;
   description: string;
   image: ProductImage;
+  deletedAt?: Date;
 }
 
 export class Product extends AggregateRoot<IProductProps> {
@@ -22,8 +23,24 @@ export class Product extends AggregateRoot<IProductProps> {
     return this.props.image;
   }
 
+  get deletedAt() {
+    return this.props.deletedAt;
+  }
+
+  set name(name: string) {
+    this.props.name = name;
+  }
+
+  set description(description: string) {
+    this.props.description = description;
+  }
+
   set image(image: ProductImage) {
     this.props.image = image;
+  }
+
+  remove() {
+    this.props.deletedAt = new Date();
   }
 
   static create(props: Optional<IProductProps, "image">, id?: UniqueEntityID) {
