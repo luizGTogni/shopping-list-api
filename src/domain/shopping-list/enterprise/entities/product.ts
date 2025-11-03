@@ -1,15 +1,15 @@
-import { Entity } from "#core/entities/entity.js";
+import { AggregateRoot } from "#core/entities/aggregate-root.js";
 import { UniqueEntityID } from "#core/entities/unique-entity-id.js";
+import type { Optional } from "#core/types/optional.js";
 import { ProductImage } from "./product-image";
 
-export interface IProduct {
+export interface IProductProps {
   name: string;
   description: string;
-  quantity: number;
   image: ProductImage;
 }
 
-export class Product extends Entity<IProduct> {
+export class Product extends AggregateRoot<IProductProps> {
   get name() {
     return this.props.name;
   }
@@ -18,16 +18,16 @@ export class Product extends Entity<IProduct> {
     return this.props.description;
   }
 
-  get quantity() {
-    return this.props.quantity;
-  }
-
   get image() {
     return this.props.image;
   }
 
-  static create(props: IProduct, id?: UniqueEntityID) {
-    const product = new Product(props, id);
+  set image(image: ProductImage) {
+    this.props.image = image;
+  }
+
+  static create(props: Optional<IProductProps, "image">, id?: UniqueEntityID) {
+    const product = new Product({ ...props, image: props.image ?? ProductImage.create() }, id);
     return product;
   }
 }
