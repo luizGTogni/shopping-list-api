@@ -8,6 +8,7 @@ export interface IShoppingListProps {
   title: string;
   products: ProductList;
   doneAt?: Date;
+  deletedAt?: Date;
   createdAt: Date;
   updatedAt?: Date;
 }
@@ -29,6 +30,10 @@ export class ShoppingList extends AggregateRoot<IShoppingListProps> {
     return this.props.doneAt;
   }
 
+  get deletedAt() {
+    return this.props.deletedAt;
+  }
+
   get createdAt() {
     return this.props.createdAt;
   }
@@ -37,12 +42,20 @@ export class ShoppingList extends AggregateRoot<IShoppingListProps> {
     return this.props.updatedAt;
   }
 
+  set title(title: string) {
+    this.props.title = title;
+  }
+
   private _touch() {
     this.props.updatedAt = new Date();
   }
 
   done() {
     this.props.doneAt = new Date();
+  }
+
+  remove() {
+    this.props.deletedAt = new Date();
   }
 
   static create(
