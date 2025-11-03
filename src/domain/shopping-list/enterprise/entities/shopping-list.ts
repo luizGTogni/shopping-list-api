@@ -3,7 +3,7 @@ import { UniqueEntityID } from "#core/entities/unique-entity-id.js";
 import { Optional } from "#core/types/optional.js";
 import { ProductList } from "./product-list";
 
-export interface IShoppingList {
+export interface IShoppingListProps {
   shopperId: UniqueEntityID;
   title: string;
   products: ProductList;
@@ -12,7 +12,7 @@ export interface IShoppingList {
   updatedAt?: Date;
 }
 
-export class ShoppingList extends AggregateRoot<IShoppingList> {
+export class ShoppingList extends AggregateRoot<IShoppingListProps> {
   get shopperId() {
     return this.props.shopperId;
   }
@@ -45,7 +45,10 @@ export class ShoppingList extends AggregateRoot<IShoppingList> {
     this.props.doneAt = new Date();
   }
 
-  static create(props: Optional<IShoppingList, "createdAt" | "products">, id?: UniqueEntityID) {
+  static create(
+    props: Optional<IShoppingListProps, "createdAt" | "products">,
+    id?: UniqueEntityID,
+  ) {
     const shoppingList = new ShoppingList(
       {
         ...props,
