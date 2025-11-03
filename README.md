@@ -19,7 +19,7 @@
 ## Shopping List Entity
 
 [X] Create Shopping List
-[ ] List All Shopping List
+[X] List All Shopping List
 [ ] Get Shopping List
 [ ] Edit Shopping List
 [ ] Done Shopping List
