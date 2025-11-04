@@ -7,6 +7,7 @@ import { makeProduct } from "#test/factories/make-product.js";
 import { makeShopper } from "#test/factories/make-shopper.js";
 import { makeShoppingList } from "#test/factories/make-shopping-list.js";
 import { InMemoryProductsRepository } from "#test/repositories/in-memory-products-repository.js";
+import { InMemoryProductsShoppingListRepository } from "#test/repositories/in-memory-products-shopping-list-repository.js";
 import { InMemoryShoppersRepository } from "#test/repositories/in-memory-shoppers-repository.js";
 import { InMemoryShoppingListsRepository } from "#test/repositories/in-memory-shopping-list-repository.js";
 import { AddProductInProductListUseCase } from "./add-product-in-shopping-list";
@@ -14,6 +15,7 @@ import { AddProductInProductListUseCase } from "./add-product-in-shopping-list";
 let shoppingListsRepository: InMemoryShoppingListsRepository;
 let shoppersRepository: InMemoryShoppersRepository;
 let productsRepository: InMemoryProductsRepository;
+let productsShoppingListRepository: InMemoryProductsShoppingListRepository;
 let sut: AddProductInProductListUseCase;
 
 describe("Add Product In Shopping List", () => {
@@ -21,10 +23,12 @@ describe("Add Product In Shopping List", () => {
     shoppingListsRepository = new InMemoryShoppingListsRepository();
     shoppersRepository = new InMemoryShoppersRepository();
     productsRepository = new InMemoryProductsRepository();
+    productsShoppingListRepository = new InMemoryProductsShoppingListRepository();
     sut = new AddProductInProductListUseCase(
       shoppingListsRepository,
       shoppersRepository,
       productsRepository,
+      productsShoppingListRepository,
     );
   });
 
