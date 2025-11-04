@@ -1,5 +1,14 @@
 # shopping-list-api
 
+## Users Domain
+[ ] Create Shopper
+[ ] Get Shopper
+[ ] Edit Shopper
+[ ] Delete / Invisible Shopper
+
+[ ] Create Admin
+[ ] List All Shopper
+
 ## Category Entity
 
 [X] Create Category
