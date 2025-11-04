@@ -56,13 +56,13 @@ export class AddProductInProductListUseCase {
       return fail(new NotAllowedError());
     }
 
-    shoppingList.products.add(
-      ProductShoppingList.create({
-        productId: product.id,
-        shoppingListId: shoppingList.id,
-        quantity,
-      }),
-    );
+    const productAdded = ProductShoppingList.create({
+      productId: product.id,
+      shoppingListId: shoppingList.id,
+      quantity,
+    });
+
+    shoppingList.products.update([productAdded]);
 
     await this.shoppingListsRepository.save(shoppingList);
 
