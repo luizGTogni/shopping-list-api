@@ -6,6 +6,7 @@ import { ShoppingListNotFoundError } from "#core/errors/types/shopping-list-not-
 import { ProductShoppingList } from "#domain/shopping-list/enterprise/entities/product-shopping-list.js";
 import type { ShoppingList } from "#domain/shopping-list/enterprise/entities/shopping-list.js";
 import type { IProductsRepository } from "../../repositories/products-repository";
+import { IProductsShoppingListRepository } from "../../repositories/products-shopping-list-repository";
 import type { IShoppersRepository } from "../../repositories/shoppers-repository";
 import type { IShoppingListsRepository } from "../../repositories/shopping-lists-repository";
 
@@ -26,6 +27,7 @@ export class AddProductInProductListUseCase {
     private readonly shoppingListsRepository: IShoppingListsRepository,
     private readonly shoppersRepository: IShoppersRepository,
     private readonly productsRepository: IProductsRepository,
+    private readonly productsShoppingListRepository: IProductsShoppingListRepository,
   ) {}
 
   async execute({
@@ -63,6 +65,7 @@ export class AddProductInProductListUseCase {
     });
 
     shoppingList.products.update([productAdded]);
+    await this.productsShoppingListRepository.update(productAdded);
 
     await this.shoppingListsRepository.save(shoppingList);
 
