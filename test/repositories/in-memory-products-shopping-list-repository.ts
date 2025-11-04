@@ -8,4 +8,8 @@ export class InMemoryProductsShoppingListRepository implements IProductsShopping
     this.items = this.items.filter((item) => !item.equals(productShoppingList));
     this.items.push(productShoppingList);
   }
+
+  async findById(id: string): Promise<ProductShoppingList | null> {
+    return this.items.find((item) => item.id.toString() === id) || null;
+  }
 }
