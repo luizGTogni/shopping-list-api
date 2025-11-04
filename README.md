@@ -22,7 +22,7 @@
 [X] List All Shopping List
 [X] Get Shopping List
 [X] Edit Shopping List
-[ ] Done Shopping List
+[X] Done Shopping List
 [ ] Delete
 
 [ ] Add Product in Shopping List
