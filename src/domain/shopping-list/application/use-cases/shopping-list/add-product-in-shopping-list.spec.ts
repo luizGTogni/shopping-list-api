@@ -55,6 +55,40 @@ describe("Add Product In Shopping List", () => {
     }
   });
 
+  it("should be able to edit product in shopping list if product already list", async () => {
+    const shopperCreated = makeShopper();
+    const productCreated = makeProduct();
+    const shoppingListCreated = makeShoppingList({ shopperId: shopperCreated.id });
+
+    shoppingListsRepository.create(shoppingListCreated);
+    productsRepository.create(productCreated);
+    shoppersRepository.items.push(shopperCreated);
+
+    let result = await sut.execute({
+      shopperId: shopperCreated.id.toString(),
+      shoppingListId: shoppingListCreated.id.toString(),
+      productId: productCreated.id.toString(),
+      quantity: 4,
+    });
+
+    if (result.isSucceeded()) {
+      expect(shoppingListsRepository.items[0].products.currentItems).toHaveLength(1);
+      expect(result.value.shoppingList.products.currentItems[0].quantity).toEqual(4);
+    }
+
+    result = await sut.execute({
+      shopperId: shopperCreated.id.toString(),
+      shoppingListId: shoppingListCreated.id.toString(),
+      productId: productCreated.id.toString(),
+      quantity: 8,
+    });
+
+    if (result.isSucceeded()) {
+      expect(shoppingListsRepository.items[0].products.currentItems).toHaveLength(1);
+      expect(result.value.shoppingList.products.currentItems[0].quantity).toEqual(8);
+    }
+  });
+
   it("should not be able to done a shopping list if shopper not exists", async () => {
     const result = await sut.execute({
       shopperId: "1",
