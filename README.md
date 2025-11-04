@@ -25,5 +25,5 @@
 [X] Done Shopping List
 [X] Delete
 
-[ ] Add Product in Shopping List
+[X] Add Product in Shopping List
 [ ] Remove Product in Shopping List
