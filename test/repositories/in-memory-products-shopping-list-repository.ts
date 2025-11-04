@@ -9,6 +9,10 @@ export class InMemoryProductsShoppingListRepository implements IProductsShopping
     this.items.push(productShoppingList);
   }
 
+  async remove(productShoppingList: ProductShoppingList): Promise<void> {
+    this.items = this.items.filter((item) => !item.equals(productShoppingList));
+  }
+
   async findById(id: string): Promise<ProductShoppingList | null> {
     return this.items.find((item) => item.id.toString() === id) || null;
   }
