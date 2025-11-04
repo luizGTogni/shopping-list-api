@@ -1,0 +1,5 @@
+import { ProductShoppingList } from "#domain/shopping-list/enterprise/entities/product-shopping-list.js";
+
+export interface IProductsShoppingListRepository {
+  update(productShoppingList: ProductShoppingList): Promise<void>;
+}
