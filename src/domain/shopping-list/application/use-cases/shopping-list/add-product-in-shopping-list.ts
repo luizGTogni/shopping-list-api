@@ -7,7 +7,7 @@ import { ProductShoppingList } from "#domain/shopping-list/enterprise/entities/p
 import type { ShoppingList } from "#domain/shopping-list/enterprise/entities/shopping-list.js";
 import type { IProductsRepository } from "../../repositories/products-repository";
 import { IProductsShoppingListRepository } from "../../repositories/products-shopping-list-repository";
-import type { IShoppersRepository } from "../../repositories/shoppers-repository";
+import type { IShoppersRepository } from "../../../../users/application/repositories/shoppers-repository";
 import type { IShoppingListsRepository } from "../../repositories/shopping-lists-repository";
 
 interface IAddProductInProductListUseCaseRequest {

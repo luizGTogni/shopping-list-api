@@ -5,7 +5,7 @@ import { ShopperNotFoundError } from "#core/errors/types/shopper-not-found-error
 import { ShoppingListNotFoundError } from "#core/errors/types/shopping-list-not-found-error.js";
 import type { ShoppingList } from "#domain/shopping-list/enterprise/entities/shopping-list.js";
 import { IProductsShoppingListRepository } from "../../repositories/products-shopping-list-repository";
-import type { IShoppersRepository } from "../../repositories/shoppers-repository";
+import type { IShoppersRepository } from "../../../../users/application/repositories/shoppers-repository";
 import type { IShoppingListsRepository } from "../../repositories/shopping-lists-repository";
 
 interface IRemoveProductInProductListUseCaseRequest {

@@ -1,6 +1,6 @@
 import { UniqueEntityID } from "#core/entities/unique-entity-id.js";
-import { ShopperImage } from "#domain/shopping-list/enterprise/entities/shopper-image.js";
-import { Shopper, type IShopperProps } from "#domain/shopping-list/enterprise/entities/shopper.js";
+import { ShopperImage } from "#domain/users/enterprise/entities/shopper-image.js";
+import { IShopperProps, Shopper } from "#domain/users/enterprise/entities/shopper.js";
 import { faker } from "@faker-js/faker";
 
 export function makeShopper(override: Partial<IShopperProps> = {}, id?: UniqueEntityID) {

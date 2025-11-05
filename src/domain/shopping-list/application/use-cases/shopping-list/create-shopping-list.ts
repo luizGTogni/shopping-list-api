@@ -2,7 +2,7 @@ import { Either, fail, success } from "#core/either.js";
 import { UniqueEntityID } from "#core/entities/unique-entity-id.js";
 import { ShopperNotFoundError } from "#core/errors/types/shopper-not-found-error.js";
 import { ShoppingList } from "#domain/shopping-list/enterprise/entities/shopping-list.js";
-import { IShoppersRepository } from "../../repositories/shoppers-repository";
+import { IShoppersRepository } from "../../../../users/application/repositories/shoppers-repository";
 import { IShoppingListsRepository } from "../../repositories/shopping-lists-repository";
 
 interface ICreateShoppingListUseCaseRequest {

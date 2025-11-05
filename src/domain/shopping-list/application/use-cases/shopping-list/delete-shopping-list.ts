@@ -2,7 +2,7 @@ import { Either, fail, success } from "#core/either.js";
 import { NotAllowedError } from "#core/errors/types/not-allowed-error.js";
 import { ShopperNotFoundError } from "#core/errors/types/shopper-not-found-error.js";
 import { ShoppingListNotFoundError } from "#core/errors/types/shopping-list-not-found-error.js";
-import type { IShoppersRepository } from "../../repositories/shoppers-repository";
+import type { IShoppersRepository } from "../../../../users/application/repositories/shoppers-repository";
 import type { IShoppingListsRepository } from "../../repositories/shopping-lists-repository";
 
 interface IDeleteShoppingListUseCaseRequest {

@@ -3,7 +3,7 @@ import { NotAllowedError } from "#core/errors/types/not-allowed-error.js";
 import { ShopperNotFoundError } from "#core/errors/types/shopper-not-found-error.js";
 import { ShoppingListNotFoundError } from "#core/errors/types/shopping-list-not-found-error.js";
 import { ShoppingList } from "#domain/shopping-list/enterprise/entities/shopping-list.js";
-import { IShoppersRepository } from "../../repositories/shoppers-repository";
+import { IShoppersRepository } from "../../../../users/application/repositories/shoppers-repository";
 import { IShoppingListsRepository } from "../../repositories/shopping-lists-repository";
 
 interface IDoneShoppingListUseCaseRequest {
