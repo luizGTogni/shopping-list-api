@@ -9,13 +9,13 @@ import { makeShopper } from "#test/factories/make-shopper.js";
 import { makeShoppingList } from "#test/factories/make-shopping-list.js";
 import { InMemoryProductsRepository } from "#test/repositories/in-memory-products-repository.js";
 import { InMemoryProductsShoppingListRepository } from "#test/repositories/in-memory-products-shopping-list-repository.js";
-import { InMemoryShoppersRepository } from "#test/repositories/in-memory-shoppers-repository.js";
 import { InMemoryShoppingListsRepository } from "#test/repositories/in-memory-shopping-list-repository.js";
+import { InMemoryUsersRepository } from "#test/repositories/in-memory-users-repository.js";
 import type { IUsersService } from "../../services/users-service-interface";
 import { AddProductInProductListUseCase } from "./add-product-in-shopping-list";
 
 let shoppingListsRepository: InMemoryShoppingListsRepository;
-let shoppersRepository: InMemoryShoppersRepository;
+let usersRepository: InMemoryUsersRepository;
 let productsRepository: InMemoryProductsRepository;
 let productsShoppingListRepository: InMemoryProductsShoppingListRepository;
 let usersService: IUsersService;
@@ -24,10 +24,10 @@ let sut: AddProductInProductListUseCase;
 describe("Add Product In Shopping List", () => {
   beforeEach(() => {
     shoppingListsRepository = new InMemoryShoppingListsRepository();
-    shoppersRepository = new InMemoryShoppersRepository();
+    usersRepository = new InMemoryUsersRepository();
     productsRepository = new InMemoryProductsRepository();
     productsShoppingListRepository = new InMemoryProductsShoppingListRepository();
-    usersService = new UsersService(shoppersRepository);
+    usersService = new UsersService(usersRepository);
     sut = new AddProductInProductListUseCase(
       shoppingListsRepository,
       productsRepository,
@@ -43,7 +43,7 @@ describe("Add Product In Shopping List", () => {
 
     shoppingListsRepository.create(shoppingListCreated);
     productsRepository.create(productCreated);
-    shoppersRepository.items.push(shopperCreated);
+    usersRepository.items.push(shopperCreated);
 
     const result = await sut.execute({
       shopperId: shopperCreated.id.toString(),
@@ -70,7 +70,7 @@ describe("Add Product In Shopping List", () => {
 
     shoppingListsRepository.create(shoppingListCreated);
     productsRepository.create(productCreated);
-    shoppersRepository.items.push(shopperCreated);
+    usersRepository.items.push(shopperCreated);
 
     let result = await sut.execute({
       shopperId: shopperCreated.id.toString(),
@@ -111,7 +111,7 @@ describe("Add Product In Shopping List", () => {
 
   it("should not be able to done a shopping list if product not exists", async () => {
     const shopperCreated = makeShopper();
-    shoppersRepository.items.push(shopperCreated);
+    usersRepository.items.push(shopperCreated);
 
     const result = await sut.execute({
       shopperId: shopperCreated.id.toString(),
@@ -128,7 +128,7 @@ describe("Add Product In Shopping List", () => {
     const shopperCreated = makeShopper();
     const productCreated = makeProduct();
     productsRepository.create(productCreated);
-    shoppersRepository.items.push(shopperCreated);
+    usersRepository.items.push(shopperCreated);
 
     const result = await sut.execute({
       shopperId: shopperCreated.id.toString(),
@@ -148,7 +148,7 @@ describe("Add Product In Shopping List", () => {
 
     shoppingListsRepository.create(shoppingListCreated);
     productsRepository.create(productCreated);
-    shoppersRepository.items.push(shopperCreated);
+    usersRepository.items.push(shopperCreated);
 
     const result = await sut.execute({
       shopperId: shopperCreated.id.toString(),

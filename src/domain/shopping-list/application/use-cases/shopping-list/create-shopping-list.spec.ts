@@ -1,19 +1,19 @@
 import { UsersService } from "#domain/shopping-list/infrastructure/users-service.js";
-import { InMemoryShoppersRepository } from "#test/repositories/in-memory-shoppers-repository.js";
 import { InMemoryShoppingListsRepository } from "#test/repositories/in-memory-shopping-list-repository.js";
+import { InMemoryUsersRepository } from "#test/repositories/in-memory-users-repository.js";
 import type { IUsersService } from "../../services/users-service-interface";
 import { CreateShoppingListUseCase } from "./create-shopping-list";
 
 let shoppingListsRepository: InMemoryShoppingListsRepository;
-let shoppersRepository: InMemoryShoppersRepository;
+let usersRepository: InMemoryUsersRepository;
 let usersService: IUsersService;
 let sut: CreateShoppingListUseCase;
 
 describe("Create ShoppingList", () => {
   beforeEach(() => {
     shoppingListsRepository = new InMemoryShoppingListsRepository();
-    shoppersRepository = new InMemoryShoppersRepository();
-    usersService = new UsersService(shoppersRepository);
+    usersRepository = new InMemoryUsersRepository();
+    usersService = new UsersService(usersRepository);
     sut = new CreateShoppingListUseCase(shoppingListsRepository, usersService);
   });
 

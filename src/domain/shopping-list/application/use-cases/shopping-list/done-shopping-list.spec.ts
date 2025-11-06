@@ -5,21 +5,21 @@ import { ShoppingListNotFoundError } from "#core/errors/types/shopping-list-not-
 import { UsersService } from "#domain/shopping-list/infrastructure/users-service.js";
 import { makeShopper } from "#test/factories/make-shopper.js";
 import { makeShoppingList } from "#test/factories/make-shopping-list.js";
-import { InMemoryShoppersRepository } from "#test/repositories/in-memory-shoppers-repository.js";
+import { InMemoryUsersRepository } from "#test/repositories/in-memory-users-repository.js";
 import { InMemoryShoppingListsRepository } from "#test/repositories/in-memory-shopping-list-repository.js";
 import type { IUsersService } from "../../services/users-service-interface";
 import { DoneShoppingListUseCase } from "./done-shopping-list";
 
 let shoppingListsRepository: InMemoryShoppingListsRepository;
-let shoppersRepository: InMemoryShoppersRepository;
+let usersRepository: InMemoryUsersRepository;
 let usersService: IUsersService;
 let sut: DoneShoppingListUseCase;
 
 describe("Done ShoppingList", () => {
   beforeEach(() => {
     shoppingListsRepository = new InMemoryShoppingListsRepository();
-    shoppersRepository = new InMemoryShoppersRepository();
-    usersService = new UsersService(shoppersRepository);
+    usersRepository = new InMemoryUsersRepository();
+    usersService = new UsersService(usersRepository);
     sut = new DoneShoppingListUseCase(shoppingListsRepository, usersService);
   });
 
@@ -28,7 +28,7 @@ describe("Done ShoppingList", () => {
     const shoppingListCreated = makeShoppingList({ shopperId: shopperCreated.id });
 
     shoppingListsRepository.create(shoppingListCreated);
-    shoppersRepository.items.push(shopperCreated);
+    usersRepository.items.push(shopperCreated);
 
     const result = await sut.execute({
       shopperId: shopperCreated.id.toString(),
@@ -54,7 +54,7 @@ describe("Done ShoppingList", () => {
 
   it("should not be able to done a shopping list if shopping list not exists", async () => {
     const shopperCreated = makeShopper();
-    shoppersRepository.items.push(shopperCreated);
+    usersRepository.items.push(shopperCreated);
 
     const result = await sut.execute({
       shopperId: shopperCreated.id.toString(),
@@ -70,7 +70,7 @@ describe("Done ShoppingList", () => {
     const shoppingListCreated = makeShoppingList({ shopperId: new UniqueEntityID("1") });
 
     shoppingListsRepository.create(shoppingListCreated);
-    shoppersRepository.items.push(shopperCreated);
+    usersRepository.items.push(shopperCreated);
 
     const result = await sut.execute({
       shopperId: shopperCreated.id.toString(),
