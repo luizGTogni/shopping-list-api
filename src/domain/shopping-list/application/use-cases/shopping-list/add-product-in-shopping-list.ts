@@ -7,8 +7,8 @@ import { ProductShoppingList } from "#domain/shopping-list/enterprise/entities/p
 import type { ShoppingList } from "#domain/shopping-list/enterprise/entities/shopping-list.js";
 import type { IProductsRepository } from "../../repositories/products-repository";
 import { IProductsShoppingListRepository } from "../../repositories/products-shopping-list-repository";
-import type { IShoppersRepository } from "../../../../users/application/repositories/shoppers-repository";
 import type { IShoppingListsRepository } from "../../repositories/shopping-lists-repository";
+import type { IUsersService } from "../../services/users-service-interface";
 
 interface IAddProductInProductListUseCaseRequest {
   shopperId: string;
@@ -25,9 +25,9 @@ type IAddProductInProductListUseCaseResponse = Either<
 export class AddProductInProductListUseCase {
   constructor(
     private readonly shoppingListsRepository: IShoppingListsRepository,
-    private readonly shoppersRepository: IShoppersRepository,
     private readonly productsRepository: IProductsRepository,
     private readonly productsShoppingListRepository: IProductsShoppingListRepository,
+    private readonly usersService: IUsersService,
   ) {}
 
   async execute({
@@ -36,9 +36,9 @@ export class AddProductInProductListUseCase {
     productId,
     quantity,
   }: IAddProductInProductListUseCaseRequest): Promise<IAddProductInProductListUseCaseResponse> {
-    const shopper = await this.shoppersRepository.findById(shopperId);
+    const shopperExists = await this.usersService.exists(shopperId);
 
-    if (!shopper) {
+    if (!shopperExists) {
       return fail(new ShopperNotFoundError());
     }
 

@@ -2,8 +2,8 @@ import { Either, fail, success } from "#core/either.js";
 import { NotAllowedError } from "#core/errors/types/not-allowed-error.js";
 import { ShopperNotFoundError } from "#core/errors/types/shopper-not-found-error.js";
 import { ShoppingListNotFoundError } from "#core/errors/types/shopping-list-not-found-error.js";
-import type { IShoppersRepository } from "../../../../users/application/repositories/shoppers-repository";
 import type { IShoppingListsRepository } from "../../repositories/shopping-lists-repository";
+import type { IUsersService } from "../../services/users-service-interface";
 
 interface IDeleteShoppingListUseCaseRequest {
   shopperId: string;
@@ -18,16 +18,16 @@ type IDeleteShoppingListUseCaseResponse = Either<
 export class DeleteShoppingListUseCase {
   constructor(
     private readonly shoppingListsRepository: IShoppingListsRepository,
-    private readonly shoppersRepository: IShoppersRepository,
+    private readonly usersService: IUsersService,
   ) {}
 
   async execute({
     shopperId,
     shoppingListId,
   }: IDeleteShoppingListUseCaseRequest): Promise<IDeleteShoppingListUseCaseResponse> {
-    const shopper = await this.shoppersRepository.findById(shopperId);
+    const shopperExists = await this.usersService.exists(shopperId);
 
-    if (!shopper) {
+    if (!shopperExists) {
       return fail(new ShopperNotFoundError());
     }
 

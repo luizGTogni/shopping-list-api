@@ -2,8 +2,8 @@ import { Either, fail, success } from "#core/either.js";
 import { UniqueEntityID } from "#core/entities/unique-entity-id.js";
 import { ShopperNotFoundError } from "#core/errors/types/shopper-not-found-error.js";
 import { ShoppingList } from "#domain/shopping-list/enterprise/entities/shopping-list.js";
-import { IShoppersRepository } from "../../../../users/application/repositories/shoppers-repository";
 import { IShoppingListsRepository } from "../../repositories/shopping-lists-repository";
+import type { IUsersService } from "../../services/users-service-interface";
 
 interface ICreateShoppingListUseCaseRequest {
   shopperId: string;
@@ -18,16 +18,16 @@ type ICreateShoppingListUseCaseResponse = Either<
 export class CreateShoppingListUseCase {
   constructor(
     private readonly shoppingListsRepository: IShoppingListsRepository,
-    private readonly shoppersRepositories: IShoppersRepository,
+    private readonly usersService: IUsersService,
   ) {}
 
   async execute({
     shopperId,
     title,
   }: ICreateShoppingListUseCaseRequest): Promise<ICreateShoppingListUseCaseResponse> {
-    const shopper = await this.shoppersRepositories.findById(shopperId);
+    const shopperExists = await this.usersService.exists(shopperId);
 
-    if (!shopper) {
+    if (!shopperExists) {
       return fail(new ShopperNotFoundError());
     }
 

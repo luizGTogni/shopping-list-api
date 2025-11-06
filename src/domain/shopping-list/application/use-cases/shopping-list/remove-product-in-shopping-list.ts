@@ -5,8 +5,8 @@ import { ShopperNotFoundError } from "#core/errors/types/shopper-not-found-error
 import { ShoppingListNotFoundError } from "#core/errors/types/shopping-list-not-found-error.js";
 import type { ShoppingList } from "#domain/shopping-list/enterprise/entities/shopping-list.js";
 import { IProductsShoppingListRepository } from "../../repositories/products-shopping-list-repository";
-import type { IShoppersRepository } from "../../../../users/application/repositories/shoppers-repository";
 import type { IShoppingListsRepository } from "../../repositories/shopping-lists-repository";
+import type { IUsersService } from "../../services/users-service-interface";
 
 interface IRemoveProductInProductListUseCaseRequest {
   shopperId: string;
@@ -22,7 +22,7 @@ type IRemoveProductInProductListUseCaseResponse = Either<
 export class RemoveProductInProductListUseCase {
   constructor(
     private readonly shoppingListsRepository: IShoppingListsRepository,
-    private readonly shoppersRepository: IShoppersRepository,
+    private readonly usersService: IUsersService,
     private readonly productsShoppingListRepository: IProductsShoppingListRepository,
   ) {}
 
@@ -31,9 +31,9 @@ export class RemoveProductInProductListUseCase {
     shoppingListId,
     productShoppingListId,
   }: IRemoveProductInProductListUseCaseRequest): Promise<IRemoveProductInProductListUseCaseResponse> {
-    const shopper = await this.shoppersRepository.findById(shopperId);
+    const shopperExists = await this.usersService.exists(shopperId);
 
-    if (!shopper) {
+    if (!shopperExists) {
       return fail(new ShopperNotFoundError());
     }
 

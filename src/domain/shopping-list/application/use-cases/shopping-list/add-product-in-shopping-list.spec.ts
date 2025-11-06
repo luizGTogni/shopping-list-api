@@ -3,6 +3,7 @@ import { NotAllowedError } from "#core/errors/types/not-allowed-error.js";
 import { ProductNotFoundError } from "#core/errors/types/product-not-found-error.js";
 import { ShopperNotFoundError } from "#core/errors/types/shopper-not-found-error.js";
 import { ShoppingListNotFoundError } from "#core/errors/types/shopping-list-not-found-error.js";
+import { UsersService } from "#domain/shopping-list/infrastructure/users-service.js";
 import { makeProduct } from "#test/factories/make-product.js";
 import { makeShopper } from "#test/factories/make-shopper.js";
 import { makeShoppingList } from "#test/factories/make-shopping-list.js";
@@ -10,12 +11,14 @@ import { InMemoryProductsRepository } from "#test/repositories/in-memory-product
 import { InMemoryProductsShoppingListRepository } from "#test/repositories/in-memory-products-shopping-list-repository.js";
 import { InMemoryShoppersRepository } from "#test/repositories/in-memory-shoppers-repository.js";
 import { InMemoryShoppingListsRepository } from "#test/repositories/in-memory-shopping-list-repository.js";
+import type { IUsersService } from "../../services/users-service-interface";
 import { AddProductInProductListUseCase } from "./add-product-in-shopping-list";
 
 let shoppingListsRepository: InMemoryShoppingListsRepository;
 let shoppersRepository: InMemoryShoppersRepository;
 let productsRepository: InMemoryProductsRepository;
 let productsShoppingListRepository: InMemoryProductsShoppingListRepository;
+let usersService: IUsersService;
 let sut: AddProductInProductListUseCase;
 
 describe("Add Product In Shopping List", () => {
@@ -24,11 +27,12 @@ describe("Add Product In Shopping List", () => {
     shoppersRepository = new InMemoryShoppersRepository();
     productsRepository = new InMemoryProductsRepository();
     productsShoppingListRepository = new InMemoryProductsShoppingListRepository();
+    usersService = new UsersService(shoppersRepository);
     sut = new AddProductInProductListUseCase(
       shoppingListsRepository,
-      shoppersRepository,
       productsRepository,
       productsShoppingListRepository,
+      usersService,
     );
   });
 

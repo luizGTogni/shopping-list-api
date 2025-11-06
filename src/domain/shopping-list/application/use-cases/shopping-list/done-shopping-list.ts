@@ -3,8 +3,8 @@ import { NotAllowedError } from "#core/errors/types/not-allowed-error.js";
 import { ShopperNotFoundError } from "#core/errors/types/shopper-not-found-error.js";
 import { ShoppingListNotFoundError } from "#core/errors/types/shopping-list-not-found-error.js";
 import { ShoppingList } from "#domain/shopping-list/enterprise/entities/shopping-list.js";
-import { IShoppersRepository } from "../../../../users/application/repositories/shoppers-repository";
 import { IShoppingListsRepository } from "../../repositories/shopping-lists-repository";
+import type { IUsersService } from "../../services/users-service-interface";
 
 interface IDoneShoppingListUseCaseRequest {
   shopperId: string;
@@ -19,16 +19,16 @@ type IDoneShoppingListUseCaseResponse = Either<
 export class DoneShoppingListUseCase {
   constructor(
     private readonly shoppingListsRepository: IShoppingListsRepository,
-    private readonly shoppersRepositories: IShoppersRepository,
+    private readonly usersService: IUsersService,
   ) {}
 
   async execute({
     shopperId,
     shoppingListId,
   }: IDoneShoppingListUseCaseRequest): Promise<IDoneShoppingListUseCaseResponse> {
-    const shopper = await this.shoppersRepositories.findById(shopperId);
+    const shopperExists = await this.usersService.exists(shopperId);
 
-    if (!shopper) {
+    if (!shopperExists) {
       return fail(new ShopperNotFoundError());
     }
 
