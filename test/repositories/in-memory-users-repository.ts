@@ -4,6 +4,10 @@ import { User } from "#domain/users/enterprise/entities/user.js";
 export class InMemoryUsersRepository implements IUsersRepository {
   public items: User[] = [];
 
+  async create(user: User): Promise<void> {
+    this.items.push(user);
+  }
+
   async findById(id: string): Promise<User | null> {
     return this.items.find((item) => item.id.toString() === id) || null;
   }
