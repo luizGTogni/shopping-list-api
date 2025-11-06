@@ -13,6 +13,7 @@
     "imports": {
         "#domain/*": "./src/domain/*",
         "#core/*": "./src/core/*",
+        "#infra/*": "./src/infrastructure/*",
         "#test/*": "./test/*"
     },
     "keywords": [],
@@ -23,6 +24,7 @@
         "@eslint/js": "9.38.0",
         "@faker-js/faker": "10.1.0",
         "@tsconfig/node24": "24.0.1",
+        "@types/bcrypt": "6.0.0",
         "@types/node": "24.9.2",
         "eslint": "9.38.0",
         "eslint-config-prettier": "10.1.8",
@@ -33,6 +35,7 @@
         "vitest": "4.0.6"
     },
     "dependencies": {
+        "bcrypt": "6.0.0",
         "typescript": "5.9.3",
         "vite": "7.1.12"
     }
