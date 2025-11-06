@@ -1,10 +1,12 @@
 import { AggregateRoot } from "#core/entities/aggregate-root.js";
 import { UniqueEntityID } from "#core/entities/unique-entity-id.js";
+import { Optional } from "#core/types/optional.js";
 import { UserImage } from "./user-image";
 
 export interface IUserProps {
   name: string;
   email: string;
+  password: string;
   profileImage: UserImage;
   role: "SHOPPER" | "ADMIN";
 }
@@ -26,8 +28,15 @@ export class User extends AggregateRoot<IUserProps> {
     return this.props.role;
   }
 
-  static create(props: IUserProps, id?: UniqueEntityID) {
-    const shopper = new User(props, id);
+  set profileImage(profileImage: UserImage) {
+    this.props.profileImage = profileImage;
+  }
+
+  static create(props: Optional<IUserProps, "profileImage">, id?: UniqueEntityID) {
+    const shopper = new User(
+      { ...props, profileImage: props.profileImage ?? UserImage.create() },
+      id,
+    );
     return shopper;
   }
 }
