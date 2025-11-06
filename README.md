@@ -1,7 +1,8 @@
 # shopping-list-api
 
 ## Users Domain
-[ ] Create Shopper
+
+[X] Create Shopper
 [ ] Get Shopper
 [ ] Edit Shopper
 [ ] Delete / Invisible Shopper
