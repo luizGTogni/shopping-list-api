@@ -3,7 +3,7 @@ import { NotAllowedError } from "#core/errors/types/not-allowed-error.js";
 import { ProductNotFoundError } from "#core/errors/types/product-not-found-error.js";
 import { ShopperNotFoundError } from "#core/errors/types/shopper-not-found-error.js";
 import { ShoppingListNotFoundError } from "#core/errors/types/shopping-list-not-found-error.js";
-import { UsersService } from "#domain/shopping-list/infrastructure/users-service.js";
+import { UsersService } from "../../../../../infrastructure/services/users-service.js";
 import { makeProduct } from "#test/factories/make-product.js";
 import { makeShopper } from "#test/factories/make-shopper.js";
 import { makeShoppingList } from "#test/factories/make-shopping-list.js";

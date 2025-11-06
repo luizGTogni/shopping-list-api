@@ -1,5 +1,5 @@
 import type { IUsersRepository } from "#domain/users/application/repositories/users-repository.js";
-import type { IUsersService } from "../application/services/users-service-interface";
+import type { IUsersService } from "../../domain/shopping-list/application/services/users-service-interface";
 
 export class UsersService implements IUsersService {
   constructor(private readonly usersRepository: IUsersRepository) {}

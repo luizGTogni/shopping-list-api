@@ -1,4 +1,4 @@
-import { UsersService } from "#domain/shopping-list/infrastructure/users-service.js";
+import { UsersService } from "../../../../../infrastructure/services/users-service.js";
 import { InMemoryShoppingListsRepository } from "#test/repositories/in-memory-shopping-list-repository.js";
 import { InMemoryUsersRepository } from "#test/repositories/in-memory-users-repository.js";
 import type { IUsersService } from "../../services/users-service-interface";

@@ -2,7 +2,7 @@ import { UniqueEntityID } from "#core/entities/unique-entity-id.js";
 import { NotAllowedError } from "#core/errors/types/not-allowed-error.js";
 import { ShopperNotFoundError } from "#core/errors/types/shopper-not-found-error.js";
 import { ShoppingListNotFoundError } from "#core/errors/types/shopping-list-not-found-error.js";
-import { UsersService } from "#domain/shopping-list/infrastructure/users-service.js";
+import { UsersService } from "../../../../../infrastructure/services/users-service.js";
 import { makeShopper } from "#test/factories/make-shopper.js";
 import { makeShoppingList } from "#test/factories/make-shopping-list.js";
 import { InMemoryUsersRepository } from "#test/repositories/in-memory-users-repository.js";

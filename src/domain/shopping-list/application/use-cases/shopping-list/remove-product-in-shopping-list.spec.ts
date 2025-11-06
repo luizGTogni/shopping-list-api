@@ -1,4 +1,4 @@
-import { UsersService } from "#domain/shopping-list/infrastructure/users-service.js";
+import { UsersService } from "../../../../../infrastructure/services/users-service.js";
 import { makeProductShoppingList } from "#test/factories/make-product-shopping-list.js";
 import { makeProduct } from "#test/factories/make-product.js";
 import { makeShopper } from "#test/factories/make-shopper.js";
