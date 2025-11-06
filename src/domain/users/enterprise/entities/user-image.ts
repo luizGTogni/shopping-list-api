@@ -1,5 +1,6 @@
 import { Entity } from "#core/entities/entity.js";
 import { UniqueEntityID } from "#core/entities/unique-entity-id.js";
+import { Optional } from "#core/types/optional.js";
 
 export interface IUserImageProps {
   userId: UniqueEntityID;
@@ -15,8 +16,11 @@ export class UserImage extends Entity<IUserImageProps> {
     return this.props.imageId;
   }
 
-  static create(props: IUserImageProps, id?: UniqueEntityID) {
-    const userImage = new UserImage(props, id);
+  static create(props: Optional<IUserImageProps, "imageId" | "userId"> = {}, id?: UniqueEntityID) {
+    const userImage = new UserImage(
+      { ...props, imageId: new UniqueEntityID(), userId: new UniqueEntityID() },
+      id,
+    );
     return userImage;
   }
 }
