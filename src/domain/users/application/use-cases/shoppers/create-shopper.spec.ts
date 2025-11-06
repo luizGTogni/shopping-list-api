@@ -1,15 +1,19 @@
+import { IHasherDriver } from "#core/drivers/hasher-driver-interface.js";
 import { UserImage } from "#domain/users/enterprise/entities/user-image.js";
+import { BcryptHasherDriver } from "#infra/drivers/bcrypt-hasher-driver.js";
 import { makeShopper } from "#test/factories/make-shopper.js";
 import { InMemoryUsersRepository } from "#test/repositories/in-memory-users-repository.js";
 import { CreateShopperUseCase } from "./create-shopper";
 
 let usersRepository: InMemoryUsersRepository;
+let hasherDriver: IHasherDriver;
 let sut: CreateShopperUseCase;
 
 describe("Create Shopper", () => {
   beforeEach(() => {
     usersRepository = new InMemoryUsersRepository();
-    sut = new CreateShopperUseCase(usersRepository);
+    hasherDriver = new BcryptHasherDriver();
+    sut = new CreateShopperUseCase(usersRepository, hasherDriver);
   });
 
   it("should be able to create a shopper", async () => {
@@ -23,7 +27,7 @@ describe("Create Shopper", () => {
     const result = await sut.execute({
       name: userData.name,
       email: userData.email,
-      password: userData.password,
+      passwordPlain: userData.password,
       profileImageId: userData.profileImageId,
     });
 
@@ -41,7 +45,7 @@ describe("Create Shopper", () => {
     const result = await sut.execute({
       name: shopper.name,
       email: shopper.email,
-      password: "123456",
+      passwordPlain: "123456",
       profileImageId: "1",
     });
 
