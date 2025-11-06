@@ -1,7 +1,7 @@
-import { IShoppersRepository } from "#domain/users/application/repositories/shoppers-repository.js";
-import { Shopper } from "#domain/shopping-list/enterprise/entities/shopper.js";
+import { IUsersRepository } from "#domain/users/application/repositories/users-repository.js";
+import type { Shopper } from "#domain/users/enterprise/entities/shopper.js";
 
-export class InMemoryShoppersRepository implements IShoppersRepository {
+export class InMemoryShoppersRepository implements IUsersRepository {
   public items: Shopper[] = [];
 
   async findById(id: string): Promise<Shopper | null> {
