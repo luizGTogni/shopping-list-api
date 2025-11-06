@@ -2,11 +2,12 @@ import { AggregateRoot } from "#core/entities/aggregate-root.js";
 import { UniqueEntityID } from "#core/entities/unique-entity-id.js";
 import { Optional } from "#core/types/optional.js";
 import { UserImage } from "./user-image";
+import { Password } from "./value-objects/password";
 
 export interface IUserProps {
   name: string;
   email: string;
-  password: string;
+  password: Password;
   profileImage: UserImage;
   role: "SHOPPER" | "ADMIN";
 }
