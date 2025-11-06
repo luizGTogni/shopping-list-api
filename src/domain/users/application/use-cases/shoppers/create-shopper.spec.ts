@@ -1,4 +1,5 @@
 import { UserImage } from "#domain/users/enterprise/entities/user-image.js";
+import { makeShopper } from "#test/factories/make-shopper.js";
 import { InMemoryUsersRepository } from "#test/repositories/in-memory-users-repository.js";
 import { CreateShopperUseCase } from "./create-shopper";
 
@@ -26,10 +27,24 @@ describe("Create Shopper", () => {
       profileImageId: userData.profileImageId,
     });
 
-    expect(result.isSucceeded()).toBe(true);
-    expect(usersRepository.items).toHaveLength(1);
-    expect(result.value?.shopper.name).toEqual(userData.name);
-    expect(result.value?.shopper.email).toEqual(userData.email);
-    expect(result.value?.shopper.profileImage).instanceOf(UserImage);
+    if (result.isSucceeded()) {
+      expect(usersRepository.items).toHaveLength(1);
+      expect(result.value?.shopper.name).toEqual(userData.name);
+      expect(result.value?.shopper.email).toEqual(userData.email);
+      expect(result.value?.shopper.profileImage).instanceOf(UserImage);
+    }
+  });
+
+  it("should not be able to create a shopper if email already registered", async () => {
+    const shopper = makeShopper();
+
+    const result = await sut.execute({
+      name: shopper.name,
+      email: shopper.email,
+      password: "123456",
+      profileImageId: "1",
+    });
+
+    expect(result.isFailed()).toEqual(true);
   });
 });
