@@ -3,9 +3,12 @@
 ## Users Domain
 
 [X] Create Shopper
-[ ] Get Shopper
+[X] Get Shopper
 [ ] Edit Shopper
 [ ] Delete / Invisible Shopper
+
+[ ] Login User -> Token | Refresh Token
+[ ] Refresh Token -> Refresh Token -> Invalida o refresh token antigo
 
 [ ] Create Admin
 [ ] List All Shopper
